@@ -8,3 +8,6 @@ __pycache__/
 
 outputs/
 work/
+.codex/
+.agents/
+scratch/
