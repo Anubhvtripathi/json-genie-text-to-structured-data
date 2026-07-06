@@ -1,154 +1,121 @@
-# 🧞 JSON Genie: Text to Structured Data
+# JSON Genie: Text to Structured Data
 
 JSON Genie is a Streamlit app that turns messy text from invoices, emails, job posts, or any user-defined document type into clean, schema-validated JSON.
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://json-genie-text-to-structured-data-ntksiqtp7tbeyvsngyvjfu.streamlit.app/)
-
-**🚀 Live Demo**: [https://json-genie-text-to-structured-data-ntksiqtp7tbeyvsngyvjfu.streamlit.app/](https://json-genie-text-to-structured-data-ntksiqtp7tbeyvsngyvjfu.streamlit.app/)
-
----
+Live demo:
+https://json-genie-text-to-structured-data-ntksiqtp7tbeyvsngyvjfu.streamlit.app/
 
 ## Features
 
-- 🧾 Extracts structured JSON from **invoices, emails, and job posts**
-- ✅ Validates output with **Pydantic models**
-- 🤖 Powered by **Groq (Llama 3)** when an API key is configured
-- 🔁 Falls back to a **local rule-based extractor** when no API key is set
-- 🧩 Supports a **runtime user-defined JSON schema**
-- ⬇️ **Export extracted JSON** with one click
-- Shows validation errors and partial JSON clearly
+- Extracts structured JSON from invoices, emails, and job posts
+- Validates output with Pydantic models
+- Uses Groq Llama models when an API key is configured
+- Falls back to a local rule-based extractor when no API key is set
+- Supports runtime user-defined JSON schemas
+- Supports file/text-based extraction workflows
+- Exports extracted JSON
+- Shows validation issues clearly without crashing
 
----
+## Quick Start
 
-## Quick Start (Local)
+### 1. Open the project folder
 
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/Anubhvtripathi/json-genie-text-to-structured-data.git
-cd json-genie-text-to-structured-data
+```powershell
+cd C:\Users\HP\Documents\Codex\2026-07-05\json-genie-text-to-structured-data
 ```
 
-### 2. Create and activate a virtual environment
+### 2. Create a virtual environment
 
-```bash
+```powershell
 python -m venv .venv
-
-# Windows
-.venv\Scripts\activate
-
-# macOS / Linux
-source .venv/bin/activate
 ```
 
-### 3. Install dependencies
+### 3. Activate it
 
-```bash
+```powershell
+.venv\Scripts\activate
+```
+
+### 4. Install dependencies
+
+```powershell
 pip install -r requirements.txt
 ```
 
-### 4. Configure your Groq API key (optional but recommended)
+### 5. Add Groq API key
 
-Copy the example file and fill in your key:
+Create a `.env` file:
 
-```bash
-copy .env.example .env   # Windows
-cp .env.example .env     # macOS / Linux
-```
-
-Then edit `.env`:
-
-```env
-GROQ_API_KEY=your_key_here
+```text
+GROQ_API_KEY=your_groq_api_key_here
 GROQ_MODEL=llama-3.3-70b-versatile
 ```
 
-> Get a free Groq API key at https://console.groq.com
+The `.env` file is ignored by Git and should not be uploaded to GitHub.
 
-### 5. Run the app
+### 6. Run the app
 
-```bash
+```powershell
 streamlit run app.py
 ```
 
-Open **http://localhost:8501** in your browser.
+Open:
 
----
+```text
+http://localhost:8501
+```
 
 ## Run Tests
 
-```bash
-# Windows
-$env:PYTHONPATH="."; .venv\Scripts\pytest
-
-# macOS / Linux
-PYTHONPATH=. pytest
+```powershell
+.venv\Scripts\python -m pytest
 ```
 
-All 5 tests should pass.
+Expected result:
 
----
+```text
+9 passed
+```
 
-## Deploy to Streamlit Cloud (Free)
+## Streamlit Cloud Deployment
 
-1. Push this project to a GitHub repository.
-2. Go to [https://streamlit.io/cloud](https://streamlit.io/cloud) and sign in.
-3. Click **"New app"** and connect your GitHub repository.
-4. Set the **Main file path** to `app.py`.
-5. Under **Advanced settings → Secrets**, add:
+1. Push this project to GitHub.
+2. Go to https://streamlit.io/cloud.
+3. Create a new app from the GitHub repository.
+4. Set the main file path to `app.py`.
+5. Add these secrets in Streamlit Cloud:
 
 ```toml
-GROQ_API_KEY = "your_key_here"
+GROQ_API_KEY = "your_groq_api_key_here"
 GROQ_MODEL = "llama-3.3-70b-versatile"
 ```
 
-6. Click **Deploy** — your app will be live in ~30 seconds!
-
-> ⚠️ **Never commit your real `.env` file to GitHub.** It is already excluded via `.gitignore`.
-
----
+6. Deploy the app.
 
 ## Project Structure
 
+```text
+app.py
+requirements.txt
+.env.example
+.streamlit/secrets.toml.example
+src/json_genie/
+  dynamic_schema.py
+  extractors.py
+  file_reader.py
+  sample_data.py
+  schema_builder.py
+  schemas.py
+  utils.py
+tests/
+examples/
 ```
-json-genie-text-to-structured-data/
-├── app.py                          # Streamlit UI entrypoint
-├── requirements.txt                # Python dependencies
-├── .env.example                    # Environment variable template
-├── .streamlit/
-│   └── secrets.toml.example        # Streamlit Cloud secrets template
-├── src/
-│   └── json_genie/
-│       ├── dynamic_schema.py       # Runtime JSON schema → Pydantic model
-│       ├── extractors.py           # Rule-based & Groq LLM extractors
-│       ├── sample_data.py          # Built-in sample texts
-│       ├── schemas.py              # Invoice, Email, JobPost Pydantic models
-│       └── utils.py                # Validation error formatting
-├── tests/
-│   └── test_extractors.py          # Pytest test suite
-└── examples/
-    ├── invoice.txt
-    ├── email.txt
-    └── job_post.txt
-```
-
----
-
-## How It Works
-
-1. **Paste** any unstructured text (invoice, email, job post, or custom).
-2. **Select** a document type and optionally enable Groq LLM extraction.
-3. **Click** "Extract JSON" — the app validates the output against a Pydantic schema.
-4. **Download** the clean JSON or inspect any validation warnings.
-
----
 
 ## Tech Stack
 
-| Tool | Purpose |
-|------|---------|
-| [Streamlit](https://streamlit.io) | Web UI |
-| [Pydantic v2](https://docs.pydantic.dev) | Schema validation |
-| [Groq](https://groq.com) | LLM JSON extraction |
-| [python-dotenv](https://github.com/theskumar/python-dotenv) | Environment config |
-| [pytest](https://pytest.org) | Testing |
+- Python
+- Streamlit
+- Pydantic
+- Groq API
+- python-dotenv
+- pytest

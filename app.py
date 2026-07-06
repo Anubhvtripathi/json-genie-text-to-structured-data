@@ -4,7 +4,9 @@ import json
 import os
 from datetime import datetime
 import pandas as pd
+# pyrefly: ignore [missing-import]
 import streamlit as st
+# pyrefly: ignore [missing-import]
 from dotenv import load_dotenv
 
 from src.json_genie.dynamic_schema import build_model_from_json_schema
@@ -1558,7 +1560,7 @@ for i, (icon, label) in enumerate(DOC_TYPE_CARDS):
           <div class="doc-type-name">{label}</div>
         </div>
         """, unsafe_allow_html=True)
-        if st.button(label, key=f"doctype_{i}", help=f"Select {label}", label_visibility="collapsed"):
+        if st.button(label, key=f"doctype_{i}", help=f"Select {label}", use_container_width=True):
             st.session_state["doc_type_card"] = label
             st.rerun()
 
