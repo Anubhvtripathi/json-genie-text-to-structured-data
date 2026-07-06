@@ -1361,16 +1361,16 @@ st.markdown("""
     <span class="logo-text">JSON Genie</span>
   </div>
   <div class="genie-nav-links">
-    <span class="genie-nav-link">Home</span>
-    <span class="genie-nav-link">Examples</span>
-    <span class="genie-nav-link">Documentation</span>
+    <a href="https://json-genie-text-to-structured-data-ntksiqtp7tbeyvsngyvjfu.streamlit.app/" target="_self" class="genie-nav-link">Home</a>
+    <a href="https://github.com/Anubhvtripathi/json-genie-text-to-structured-data/tree/master/examples" target="_blank" class="genie-nav-link">Examples</a>
+    <a href="https://github.com/Anubhvtripathi/json-genie-text-to-structured-data/blob/master/README.md" target="_blank" class="genie-nav-link">Documentation</a>
     <a href="https://github.com/Anubhvtripathi/json-genie-text-to-structured-data" target="_blank" class="genie-nav-link">GitHub</a>
-    <span class="genie-nav-link">About</span>
+    <a href="https://github.com/Anubhvtripathi" target="_blank" class="genie-nav-link">About</a>
   </div>
   <div class="genie-nav-actions">
-    <div class="nav-icon-btn" title="Toggle Theme">🌙</div>
-    <div class="nav-icon-btn" title="Settings">⚙️</div>
-    <div class="nav-icon-btn" title="Profile">👤</div>
+    <a href="https://github.com/Anubhvtripathi/json-genie-text-to-structured-data" target="_blank" class="nav-icon-btn" title="GitHub Repo" style="text-decoration:none;">⭐</a>
+    <a href="https://github.com/Anubhvtripathi/json-genie-text-to-structured-data/issues" target="_blank" class="nav-icon-btn" title="Report an Issue" style="text-decoration:none;">🐛</a>
+    <a href="https://github.com/Anubhvtripathi" target="_blank" class="nav-icon-btn" title="Author Profile" style="text-decoration:none;">👤</a>
   </div>
 </nav>
 """, unsafe_allow_html=True)
@@ -2067,19 +2067,20 @@ with tab_chat:
 st.markdown("""
 <div class="genie-footer">
   <div class="footer-powered">
-    <span class="footer-tech"><span class="dot"></span> Groq Cloud</span>
-    <span class="footer-tech"><span class="dot"></span> Llama 3.3</span>
-    <span class="footer-tech"><span class="dot"></span> Pydantic</span>
-    <span class="footer-tech"><span class="dot"></span> Streamlit</span>
+    <a href="https://console.groq.com/" target="_blank" class="footer-tech" style="text-decoration:none;"><span class="dot"></span> Groq Cloud</a>
+    <a href="https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct" target="_blank" class="footer-tech" style="text-decoration:none;"><span class="dot"></span> Llama 3.3</a>
+    <a href="https://docs.pydantic.dev/" target="_blank" class="footer-tech" style="text-decoration:none;"><span class="dot"></span> Pydantic</a>
+    <a href="https://streamlit.io/" target="_blank" class="footer-tech" style="text-decoration:none;"><span class="dot"></span> Streamlit</a>
   </div>
   <div class="footer-links">
     <a href="https://github.com/Anubhvtripathi/json-genie-text-to-structured-data" target="_blank" class="footer-link">GitHub</a>
-    <a href="#" class="footer-link">Documentation</a>
-    <a href="#" class="footer-link">Privacy</a>
+    <a href="https://github.com/Anubhvtripathi/json-genie-text-to-structured-data/blob/master/README.md" target="_blank" class="footer-link">Documentation</a>
+    <a href="https://github.com/Anubhvtripathi/json-genie-text-to-structured-data/blob/master/README.md#streamlit-cloud-deployment" target="_blank" class="footer-link">Deployment Guide</a>
+    <a href="https://github.com/Anubhvtripathi/json-genie-text-to-structured-data/issues" target="_blank" class="footer-link">Report Issue</a>
     <span class="footer-link" style="color:#475569;cursor:default;">v1.0.0</span>
   </div>
   <div class="footer-credit">
-    Made with <span class="heart">❤️</span> by <span class="name">Anubhav Tripathi</span>
+    Made with <span class="heart">❤️</span> by <a href="https://github.com/Anubhvtripathi" target="_blank" class="name" style="text-decoration:none;">Anubhav Tripathi</a>
   </div>
 </div>
 """, unsafe_allow_html=True)
