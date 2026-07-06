@@ -22,10 +22,11 @@ def extract_structured_data(
     model: type[BaseModel],
     document_type: str,
     prefer_llm: bool = False,
+    language: str = "English",
 ) -> ExtractionResult:
     if prefer_llm and _setting("GROQ_API_KEY"):
         try:
-            return _extract_with_groq(text=text, model=model, document_type=document_type)
+            return _extract_with_groq(text=text, model=model, document_type=document_type, language=language)
         except Exception as exc:
             fallback = _extract_with_rules(text=text, model=model, document_type=document_type)
             fallback.errors.append(
@@ -45,6 +46,7 @@ def _extract_with_groq(
     text: str,
     model: type[BaseModel],
     document_type: str,
+    language: str = "English",
 ) -> ExtractionResult:
     from groq import Groq
 
@@ -55,7 +57,8 @@ def _extract_with_groq(
     prompt = (
         f"Extract a {document_type} from the text. Return only fields from the schema. "
         "Use null for unknown scalar values and [] for unknown list values. "
-        "Do not invent facts. Return one valid JSON object only.\n\n"
+        "Do not invent facts. Return one valid JSON object only.\n"
+        f"IMPORTANT: The response data and all text values must be extracted and returned in language: {language}.\n\n"
         f"JSON Schema:\n{schema}\n\n"
         f"Text:\n{text}"
     )
@@ -63,7 +66,7 @@ def _extract_with_groq(
     completion = client.chat.completions.create(
         model=model_name,
         messages=[
-            {"role": "system", "content": "You extract structured data and obey the provided schema."},
+            {"role": "system", "content": f"You extract structured data, obey the provided schema, and respond in the target language {language}."},
             {"role": "user", "content": prompt},
         ],
         response_format={"type": "json_object"},
