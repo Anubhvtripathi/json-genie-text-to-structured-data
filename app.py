@@ -177,8 +177,8 @@ if document_type == "Custom Schema":
 else:
     model = DOCUMENT_MODELS[document_type]
 
-# ── Main Tabs (Single Extract & Batch Process) ─────────────────────────────────
-tab_single, tab_batch = st.tabs(["📄 Single Document", "📁 Batch Processing"])
+# ── Main Tabs (Single Extract, Batch Process, Genie Chat) ──────────────────────
+tab_single, tab_batch, tab_chat = st.tabs(["📄 Single Document", "📁 Batch Processing", "💬 Genie Chat"])
 
 # ── Tab 1: Single Document ─────────────────────────────────────────────────────
 with tab_single:
@@ -430,3 +430,87 @@ with tab_batch:
                         )
                 except Exception as err:
                     st.error(f"Error compiling batch results table: {err}")
+
+# ── Tab 3: Genie Chat ──────────────────────────────────────────────────────────
+with tab_chat:
+    st.subheader("💬 Interactive Genie Chat")
+    st.write(
+        "Ask questions about your currently loaded document, schema validations, or job details. "
+        "The AI will only answer questions relevant to the document context."
+    )
+
+    # Display current document preview if any
+    current_doc = st.session_state.get("raw_input_text", "").strip()
+    if current_doc:
+        with st.expander("📄 Active Document Preview"):
+            st.text(current_doc[:1000] + ("..." if len(current_doc) > 1000 else ""))
+    else:
+        st.info("💡 Tip: Upload a document or paste text in the 'Single Document' tab to chat about it.")
+
+    # Initialize chat history
+    if "chat_history" not in st.session_state:
+        st.session_state["chat_history"] = []
+
+    # Clear chat button
+    if st.session_state["chat_history"]:
+        if st.button("🧹 Clear Chat History", type="secondary"):
+            st.session_state["chat_history"] = []
+            st.rerun()
+
+    # Display previous messages
+    for msg in st.session_state["chat_history"]:
+        with st.chat_message(msg["role"]):
+            st.write(msg["content"])
+
+    # Chat input
+    if prompt := st.chat_input("Ask a question about the document..."):
+        # Display user message
+        with st.chat_message("user"):
+            st.write(prompt)
+        st.session_state["chat_history"].append({"role": "user", "content": prompt})
+
+        # Generate assistant response
+        with st.chat_message("assistant"):
+            # Check key
+            api_key = os.getenv("GROQ_API_KEY")
+            if not api_key:
+                try:
+                    import streamlit as st
+                    api_key = st.secrets.get("GROQ_API_KEY")
+                except Exception:
+                    pass
+
+            if not api_key:
+                st.error("❌ Groq API key is missing. Set GROQ_API_KEY in your environment, secrets, or .env file to enable chat.")
+            else:
+                with st.spinner("Genie is thinking..."):
+                    try:
+                        from groq import Groq
+                        client = Groq(api_key=api_key)
+                        model_name = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
+                        
+                        system_prompt = (
+                            "You are JSON Genie, a helpful AI document extraction assistant.\n"
+                            "Your job is to answer questions about the document below or discuss the schemas/extraction rules.\n"
+                            "IMPORTANT: You must only discuss topics related to the document, job extraction, invoices, emails, schemas, or data processing. "
+                            "If the user asks about unrelated topics (like weather, general coding questions unrelated to parsing this document, recipes, jokes, etc.), "
+                            "you MUST politely decline and steer the conversation back to the document.\n\n"
+                            f"Active Document Content:\n{current_doc if current_doc else '(No document uploaded yet.)'}"
+                        )
+                        
+                        messages = [{"role": "system", "content": system_prompt}]
+                        # Append last 10 messages for context
+                        for m in st.session_state["chat_history"][-10:]:
+                            messages.append({"role": m["role"], "content": m["content"]})
+                            
+                        completion = client.chat.completions.create(
+                            model=model_name,
+                            messages=messages,
+                            temperature=0.2,
+                        )
+                        response = completion.choices[0].message.content
+                        st.write(response)
+                        st.session_state["chat_history"].append({"role": "assistant", "content": response})
+                    except Exception as e:
+                        st.error(f"Error calling Groq model: {e}")
+
