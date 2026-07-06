@@ -1,8 +1,10 @@
-# JSON Genie: Text to Structured Data
+# 🧞 JSON Genie: Text to Structured Data
 
-JSON Genie is a Streamlit app that turns messy text from invoices, emails, job posts, or any user-defined document type into schema-validated JSON.
+JSON Genie is a Streamlit app that turns messy text from invoices, emails, job posts, or any user-defined document type into clean, schema-validated JSON.
 
-**Live Demo**: *(deploy to Streamlit Cloud — see instructions below)*
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://json-genie-text-to-structured-data-ntksiqtp7tbeyvsngyvjfu.streamlit.app/)
+
+**🚀 Live Demo**: [https://json-genie-text-to-structured-data-ntksiqtp7tbeyvsngyvjfu.streamlit.app/](https://json-genie-text-to-structured-data-ntksiqtp7tbeyvsngyvjfu.streamlit.app/)
 
 ---
 
