@@ -1,0 +1,11 @@
+Data Analyst - BrightMart Retail
+Location: Austin, TX or Remote
+Employment: Full-time
+Salary: $85,000 - $105,000
+
+We are looking for a Data Analyst with 3+ years of experience in SQL, Python, Tableau, and stakeholder reporting.
+
+Responsibilities:
+- Build weekly performance dashboards
+- Analyze customer purchase behavior
+- Present insights to product and marketing teams

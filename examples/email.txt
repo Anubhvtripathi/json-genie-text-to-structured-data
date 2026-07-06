@@ -1,0 +1,10 @@
+From: priya.shah@example.com
+To: operations@example.com
+Subject: Urgent: Reschedule onboarding call
+Date: 2026-07-03
+
+Hi team,
+The new client cannot join tomorrow's onboarding call. Please move it to next Tuesday morning and send an updated invite. Also prepare the revised setup checklist before the call.
+
+Thanks,
+Priya

@@ -1,0 +1,13 @@
+Acme Supplies LLC
+Invoice # INV-1048
+Bill to: Northstar Analytics
+Invoice date: 2026-06-18
+Due date: 2026-07-18
+
+Items:
+- Cloud storage plan, qty 2, unit price 120.00, amount 240.00
+- Support package, qty 1, unit price 80.00, amount 80.00
+
+Subtotal: $320.00
+Tax: $25.60
+Total Due: $345.60
