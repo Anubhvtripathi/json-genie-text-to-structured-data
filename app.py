@@ -50,6 +50,7 @@ if "chat_history" not in st.session_state:
 
 # ── Premium CSS ─────────────────────────────────────────────────────────────────
 st.markdown("""
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -1349,6 +1350,310 @@ label, .stLabel, [data-testid="stWidgetLabel"] {
   font-family: 'Inter', sans-serif !important;
   font-size: 0.85rem !important;
   color: var(--text-secondary) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   MOBILE RESPONSIVENESS — PHONES (≤ 768px)
+═══════════════════════════════════════════════════ */
+
+/* Tighten main container padding on mobile */
+@media (max-width: 768px) {
+  .main .block-container {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+    padding-top: 0.5rem !important;
+    max-width: 100% !important;
+  }
+
+  /* ── Nav Bar ── */
+  .genie-nav {
+    padding: 0 1rem;
+    height: auto;
+    min-height: 56px;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .genie-nav-links {
+    display: none !important;
+  }
+
+  .genie-nav-logo {
+    font-size: 0.95rem;
+  }
+
+  .genie-nav-actions {
+    gap: 6px;
+  }
+
+  .nav-icon-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 0.85rem;
+  }
+
+  /* ── Hero Section ── */
+  .hero-section {
+    padding: 1.75rem 0 1.25rem;
+    text-align: center;
+  }
+
+  .hero-section::before {
+    width: 100%;
+    height: 300px;
+  }
+
+  .hero-title {
+    font-size: clamp(1.9rem, 8vw, 2.6rem) !important;
+    letter-spacing: -0.03em !important;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+
+  .hero-desc {
+    font-size: 0.85rem;
+    max-width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-btn-primary,
+  .hero-btn-secondary {
+    font-size: 0.85rem;
+    padding: 10px 18px;
+  }
+
+  /* ── JSON Preview Card (hero right col) ── */
+  .json-preview-card {
+    font-size: 0.72rem;
+    padding: 1rem 1rem;
+    line-height: 1.65;
+    margin-top: 1rem;
+  }
+
+  /* ── Stats Row: 2 columns on mobile ── */
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.6rem;
+    margin: 1rem 0 1.5rem;
+  }
+
+  .stat-card {
+    padding: 0.85rem 0.9rem;
+    gap: 0.65rem;
+  }
+
+  .stat-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 0.95rem;
+  }
+
+  .stat-value {
+    font-size: 1.2rem;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+  }
+
+  /* ── Doc Type Grid: 3 columns on mobile ── */
+  .doc-type-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.4rem;
+  }
+
+  .doc-type-card {
+    padding: 0.7rem 0.4rem;
+    gap: 4px;
+  }
+
+  .doc-type-icon {
+    font-size: 1.2rem;
+  }
+
+  .doc-type-name {
+    font-size: 0.7rem;
+  }
+
+  /* ── Streamlit columns used as doc type cards — force them to wrap ── */
+  [data-testid="column"] {
+    min-width: 0 !important;
+  }
+
+  /* ── Progress Steps ── */
+  .progress-steps {
+    padding: 1rem 0.75rem;
+    overflow-x: auto;
+    gap: 0;
+  }
+
+  .step-label {
+    font-size: 0.62rem;
+  }
+
+  .step-dot {
+    width: 26px;
+    height: 26px;
+    font-size: 0.72rem;
+  }
+
+  /* ── Field Cards: 2 cols on mobile ── */
+  .field-cards-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem;
+  }
+
+  .field-card {
+    padding: 0.75rem 0.8rem;
+  }
+
+  /* ── Result Metrics: 1 col on very small ── */
+  .result-metrics {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem;
+  }
+
+  /* ── Panels ── */
+  .panel-header {
+    padding: 0.75rem 1rem;
+  }
+
+  .panel-body {
+    padding: 1rem 0.875rem;
+  }
+
+  /* ── Tabs: scrollable on mobile ── */
+  .stTabs [data-baseweb="tab-list"] {
+    width: 100% !important;
+    overflow-x: auto !important;
+    flex-wrap: nowrap !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .stTabs [data-baseweb="tab"] {
+    font-size: 0.78rem !important;
+    padding: 6px 12px !important;
+    white-space: nowrap !important;
+  }
+
+  /* ── Success / Warn banners ── */
+  .success-banner,
+  .warn-banner {
+    padding: 0.75rem 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* ── Empty State ── */
+  .empty-state {
+    padding: 2.5rem 1rem;
+  }
+
+  .empty-state-icon {
+    font-size: 2.2rem;
+  }
+
+  /* ── Footer ── */
+  .genie-footer {
+    margin-top: 2rem;
+    padding: 1.5rem 0;
+  }
+
+  .footer-powered,
+  .footer-links {
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* ── Sidebar on mobile: reduce padding ── */
+  [data-testid="stSidebar"] > div {
+    padding-top: 1rem !important;
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+
+  .sidebar-section {
+    padding: 0.75rem;
+  }
+
+  /* ── Button adjustments ── */
+  .stButton > button {
+    font-size: 0.82rem !important;
+    padding: 0.5rem 0.9rem !important;
+  }
+
+  /* ── Section label ── */
+  .section-label {
+    font-size: 0.72rem;
+  }
+
+  /* ── Workspace header ── */
+  .workspace-header {
+    font-size: 0.7rem;
+    margin-bottom: 0.75rem;
+  }
+}
+
+/* ── Very small phones (≤ 480px) ── */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: clamp(1.6rem, 9vw, 2rem) !important;
+  }
+
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .doc-type-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .field-cards-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .result-metrics {
+    grid-template-columns: 1fr !important;
+  }
+
+  .json-preview-card {
+    font-size: 0.68rem;
+  }
+}
+
+/* ── Tablet (769px – 1024px) ── */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .main .block-container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    max-width: 100% !important;
+  }
+
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .doc-type-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  .genie-nav-links {
+    gap: 0;
+  }
+
+  .genie-nav-link {
+    padding: 6px 10px;
+    font-size: 0.82rem;
+  }
 }
 </style>
 """, unsafe_allow_html=True)
